@@ -1,0 +1,16 @@
+.someClass {
+background-color: aqua;
+}
+
+.error {
+    border: 1px solid red;
+}
+.messageOfError {
+    color: red;
+}
+.buttonAdd {
+    margin-left: 20px;
+}
+.totalCounter {
+    margin-left: 20px;
+}

@@ -1,0 +1,27 @@
+.someClass {
+    display: flex;
+    padding: 5px;
+}
+.filterButtons {
+    background-color: brown;
+}
+.activeFilter {
+    background-color: aqua;
+}
+
+.removeButton {
+    width: 150px;
+    margin-left: 100px;
+}
+
+.lowColorPriority {
+    color: green;
+    font-weight: bold;
+}
+.highColorPriority {
+    color: red;
+    font-weight: bold;
+}
+.affairName {
+    margin-right: 100px;
+}
