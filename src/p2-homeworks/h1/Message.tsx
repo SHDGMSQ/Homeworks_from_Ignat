@@ -14,15 +14,9 @@ function Message (props: MessageType) {
         <div className={s.message}>
             <img src={props.avatar}/>
             <div className={s.inner}>
-                <div className={s.name}>
-            {props.name}
-                </div>
-                <div className={s.textMessage}>
-            {props.message}
-                </div>
-                <div className={s.time}>
-            {props.time}
-                </div>
+                <div className={s.name}> {props.name} </div>
+                <div className={s.textMessage}> {props.message} </div>
+                <div className={s.time}> {props.time} </div>
             </div>
         </div>
     )
