@@ -15,12 +15,12 @@ function Affair(props: AffairPropsType) {
 
     return (
         <div className={s.someClass}>
-            <span className={s.affairName}>
+            <div className={s.affairName}>
             {props.affair.name}
-                </span>
-            <span className={props.affair.priority === 'low' || props.affair.priority === 'middle' ? s.lowColorPriority : s.highColorPriority}>
+                </div>
+            <div className={props.affair.priority === 'low' || props.affair.priority === 'middle' ? s.lowColorPriority : s.highColorPriority}>
             [{props.affair.priority}]
-                </span>
+                </div>
             <button className={s.removeButton}
                     onClick={deleteCallback}>X
             </button>
