@@ -9,13 +9,16 @@
 }
 .filterButtons {
     background-color: brown;
+    margin-left: 10px;
 }
 .activeFilter {
     background-color: aqua;
+    margin-left: 10px;
 }
 
 .removeButton {
     width: 50px;
+    margin-bottom: 5px;
 }
 
 .lowColorPriority {
@@ -28,4 +31,5 @@
 }
 .affairName {
     margin-right: 100px;
+    margin-bottom: 10px;
 }
