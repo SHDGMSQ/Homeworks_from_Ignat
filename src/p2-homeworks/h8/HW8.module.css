@@ -1,0 +1,11 @@
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+.people {
+    display: flex;
+    justify-content: space-between;
+    width: 230px;
+    color: bisque;
+}
+
