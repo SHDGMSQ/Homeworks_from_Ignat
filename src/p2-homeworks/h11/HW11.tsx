@@ -11,6 +11,7 @@ function HW11() {
     const [disable, setDisable] = useState<boolean>(false);
     const [minValue, setMinValue] = useState<number>(0);
     const [maxValue, setMaxValue] = useState<number>(100);
+    const [error, setError] = useState<string | null>(null);
 
 
     const onChangeValueCallback = (value: number) => {
@@ -35,7 +36,7 @@ function HW11() {
 
     };
     const onChangeCountHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (+e.currentTarget.value < 0) {
+        if (+e.currentTarget.value <= 0) {
             return;
         } else {
             setCountStep(+e.currentTarget.value);
@@ -45,12 +46,27 @@ function HW11() {
         }
     };
     const onChangeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setMinValue(+e.currentTarget.value);
-        setValue1(+e.currentTarget.value);
-        setValue2([+e.currentTarget.value, value2[1]]);
-        setDisable(false);
+        if (+e.currentTarget.value >= maxValue) {
+            setMinValue(+e.currentTarget.value)
+            setError('Min value must be less than max value! Type correct value');
+            setDisable(true)
+            return;
+        } else {
+            setError(null)
+            setMinValue(+e.currentTarget.value);
+            setValue1(+e.currentTarget.value);
+            setValue2([+e.currentTarget.value, value2[1]]);
+            setDisable(false);
+        }
     };
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+        if (+e.currentTarget.value <= minValue) {
+            setMaxValue(+e.currentTarget.value)
+            setError('Max value must be more than min value! Type correct value')
+            setDisable(true)
+            return
+        }
+        setError(null)
         setMaxValue(+e.currentTarget.value);
         setValue2([value2[0], +e.currentTarget.value]);
         setDisable(false);
@@ -89,7 +105,9 @@ function HW11() {
                 />
                 <span>{value2[1]}</span>
             </div>
-
+            <div className={style.error}>
+            {error}
+            </div>
             <div className={style.inputComponents}>
                 <div className={style.inputComponent}>
                     <InputComponent
@@ -113,7 +131,7 @@ function HW11() {
                     <InputComponent
                         type={'number'}
                         title={'Set max value'}
-                        defaultValue={1}
+                        defaultValue={100}
                         value={maxValue}
                         onChange={onChangeMaxValue}
                     />

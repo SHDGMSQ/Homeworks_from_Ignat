@@ -39,6 +39,7 @@ const SuperRange: React.FC<SuperRangePropsType> = (
                 min={restProps.min}
                 max={restProps.max}
 
+
                 {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
             />
         </>
