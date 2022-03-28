@@ -1,29 +1,61 @@
-import React, {ChangeEvent, ChangeEventHandler, DetailedHTMLProps, InputHTMLAttributes, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import SuperRange from './common/c7-SuperRange/SuperRange';
 import SuperDoubleRange from './common/c8-SuperDoubleRange/SuperDoubleRange';
+import {InputComponent} from './common/InputComponent/InputComponent';
+import style from '../h11/common/InputComponent/InputComponent.module.css';
 
 function HW11() {
-    const [value1, setValue1] = useState<number>(20);
-    const [value2, setValue2] = React.useState<number[]>([20, 80]);
+    const [value1, setValue1] = useState<number>(0);
+    const [value2, setValue2] = React.useState<number[]>([0, 100]);
     const [countStep, setCountStep] = useState<number>(1);
+    const [disable, setDisable] = useState<boolean>(false);
+    const [minValue, setMinValue] = useState<number>(0);
+    const [maxValue, setMaxValue] = useState<number>(100);
 
 
     const onChangeValueCallback = (value: number) => {
         if (value - 1 >= value2[1]) {
+            setDisable(true);
             return;
         } else {
+            setDisable(false);
             setValue1(value);
             setValue2([value, value2[1]]);
         }
     };
     const onChangeSecondValueCallback = (newValue: number[]) => {
-            setValue2([newValue[0], newValue[1]]);
-            setValue1(value2[0]);
+        if (newValue[0] >= newValue[1] || newValue[1] <= newValue[0]) {
+            setDisable(true);
+        }
+        if (value1 === newValue[1]) {
+            setDisable(false);
+        }
+        setValue2([newValue[0], newValue[1]]);
+        setValue1(value2[0]);
+
+    };
+    const onChangeCountHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (+e.currentTarget.value < 0) {
+            return;
+        } else {
+            setCountStep(+e.currentTarget.value);
+            setValue1(minValue);
+            setValue2([minValue, maxValue]);
+            setDisable(false);
+        }
+    };
+    const onChangeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setMinValue(+e.currentTarget.value);
+        setValue1(+e.currentTarget.value);
+        setValue2([+e.currentTarget.value, value2[1]]);
+        setDisable(false);
+    };
+    const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setMaxValue(+e.currentTarget.value);
+        setValue2([value2[0], +e.currentTarget.value]);
+        setDisable(false);
     };
 
-    const onChangeCountHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setCountStep(+e.currentTarget.value);
-    }
 
     return (
         <div>
@@ -37,6 +69,8 @@ function HW11() {
                     onChangeRange={onChangeValueCallback}
                     value={value1}
                     step={countStep}
+                    min={minValue}
+                    max={maxValue}
 
                     // сделать так чтоб value1 изменялось
                 />
@@ -48,18 +82,43 @@ function HW11() {
                     onChangeRange={onChangeSecondValueCallback}
                     value={[value2[0], value2[1]]}
                     step={countStep}
+                    disable={disable}
+                    min={minValue}
+                    max={maxValue}
                     // сделать так чтоб value1 и value2 изменялось
                 />
                 <span>{value2[1]}</span>
             </div>
 
-            <InputComponent
-                type={'number'}
-                title={'Steps count'}
-                defaultValue={1}
-                value={countStep}
-                onChange={onChangeCountHandler}
-            />
+            <div className={style.inputComponents}>
+                <div className={style.inputComponent}>
+                    <InputComponent
+                        type={'number'}
+                        title={'Steps count'}
+                        defaultValue={1}
+                        value={countStep}
+                        onChange={onChangeCountHandler}
+                    />
+                </div>
+                <div className={style.inputComponent}>
+                    <InputComponent
+                        type={'number'}
+                        title={'Set min value'}
+                        defaultValue={0}
+                        value={minValue}
+                        onChange={onChangeMinValue}
+                    />
+                </div>
+                <div className={style.inputComponent}>
+                    <InputComponent
+                        type={'number'}
+                        title={'Set max value'}
+                        defaultValue={1}
+                        value={maxValue}
+                        onChange={onChangeMaxValue}
+                    />
+                </div>
+            </div>
             <hr/>
             {/*для личного творчества, могу проверить*/}
             {/*<AlternativeSuperRange/>*/}
@@ -71,22 +130,3 @@ function HW11() {
 
 export default HW11;
 
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-
-type InputComponentPropsType = DefaultInputPropsType & {}
-
-const InputComponent: React.FC<InputComponentPropsType> = ({
-...restProps
-                                                           }) => {
-    return <>
-        <div>
-            {restProps.title}
-        </div>
-        <input type={restProps.type}
-               defaultValue={restProps.defaultValue}
-               value={restProps.value}
-               onChange={restProps.onChange}
-        />
-    </>
-
-}

@@ -1,0 +1,15 @@
+
+.inputComponents {
+    display: flex;
+    margin-left: 10px;
+}
+
+.inputComponent {
+    margin-right: 5px;
+    text-align: center;
+    color: gold;
+}
+.input {
+    text-align: center;
+    width: 100px;
+}

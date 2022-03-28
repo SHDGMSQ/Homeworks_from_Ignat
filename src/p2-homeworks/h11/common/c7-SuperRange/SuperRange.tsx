@@ -20,12 +20,12 @@ const SuperRange: React.FC<SuperRangePropsType> = (
     }
 ) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-       onChange && onChange(e) // сохраняем старую функциональность
+        onChange && onChange(e); // сохраняем старую функциональность
 
-        onChangeRange && onChangeRange(+e.currentTarget.value)
-    }
+        onChangeRange && onChangeRange(+e.currentTarget.value);
+    };
 
-    const finalRangeClassName = `${s.range} ${className ? className : ''}`
+    const finalRangeClassName = `${s.range} ${className ? className : ''}`;
 
 
     return (
@@ -36,11 +36,13 @@ const SuperRange: React.FC<SuperRangePropsType> = (
                 className={finalRangeClassName}
                 value={restProps.value}
                 step={restProps.step}
+                min={restProps.min}
+                max={restProps.max}
 
                 {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
             />
         </>
-    )
-}
+    );
+};
 
-export default SuperRange
+export default SuperRange;
