@@ -21,3 +21,27 @@
 .some-text {
     color: darkslateblue;
 }
+
+.gold {
+    background: gold;
+}
+
+.gold-text {
+    color: #0d5ece;
+}
+
+.cool {
+    background: blue;
+}
+
+.cool-text {
+    color: yellow;
+}
+
+.free {
+    background: white;
+}
+
+.free-text {
+    color: red;
+}

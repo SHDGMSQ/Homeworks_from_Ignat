@@ -1,7 +1,7 @@
-import React from 'react'
-import {NavLink} from 'react-router-dom'
-import {PATH} from "./Pathway";
-import s from "./Header.module.css"
+import React from 'react';
+import {NavLink} from 'react-router-dom';
+import {PATH} from './Pathway';
+import s from './Header.module.css';
 
 function Header() {
     return (
@@ -16,9 +16,9 @@ function Header() {
             <div className={s.items}>
                 <NavLink to={PATH.JUNIOR_PLUS} className={(Link) => Link.isActive ? s.activeLink : ''}>junior+</NavLink>
             </div>
-            <div className={s.menu}> </div>
+            <div className={s.menu}></div>
         </div>
-    )
+    );
 }
 
-export default Header
+export default Header;
