@@ -13,6 +13,15 @@ function HW11() {
     const [maxValue, setMaxValue] = useState<number>(100);
     const [error, setError] = useState<string | null>(null);
 
+   /* const checkStepValue = () => {
+        let resultValueOfSub = value2[1] - value1
+        if (countStep > resultValueOfSub){
+            setDisable(true)
+            setError('Steps count should be between min and max value')
+        } else {
+            return
+        }
+    };*/
 
     const onChangeValueCallback = (value: number) => {
         if (value - 1 >= value2[1]) {
@@ -47,12 +56,12 @@ function HW11() {
     };
     const onChangeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
         if (+e.currentTarget.value >= maxValue) {
-            setMinValue(+e.currentTarget.value)
+            setMinValue(+e.currentTarget.value);
             setError('Min value must be less than max value! Type correct value');
-            setDisable(true)
+            setDisable(true);
             return;
         } else {
-            setError(null)
+            setError(null);
             setMinValue(+e.currentTarget.value);
             setValue1(+e.currentTarget.value);
             setValue2([+e.currentTarget.value, value2[1]]);
@@ -61,12 +70,12 @@ function HW11() {
     };
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         if (+e.currentTarget.value <= minValue) {
-            setMaxValue(+e.currentTarget.value)
-            setError('Max value must be more than min value! Type correct value')
-            setDisable(true)
-            return
+            setMaxValue(+e.currentTarget.value);
+            setError('Max value must be more than min value! Type correct value');
+            setDisable(true);
+            return;
         }
-        setError(null)
+        setError(null);
         setMaxValue(+e.currentTarget.value);
         setValue2([value2[0], +e.currentTarget.value]);
         setDisable(false);
@@ -106,7 +115,7 @@ function HW11() {
                 <span>{value2[1]}</span>
             </div>
             <div className={style.error}>
-            {error}
+                {error}
             </div>
             <div className={style.inputComponents}>
                 <div className={style.inputComponent}>
